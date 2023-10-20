@@ -1,11 +1,11 @@
 ```markdown
 # PDF Extractor
 
-PDF Extractor is a Python package that allows you to extract text from PDF documents and save it in DOCX format.
+PDFtext2docx Extractor is a Python package that allows you to extract text from PDF documents and save it in DOCX format.
 
 ## Installation
 
-To install PDF Extractor, you can use `pip`. We recommend creating a virtual environment to keep your project dependencies isolated.
+To install PDFtext2docx Extractor, you can use `pip`. We recommend creating a virtual environment to keep your project dependencies isolated.
 
 ```bash
 pip install install git+https://github.com/ivangoranov/PDFtext2docx
@@ -18,7 +18,7 @@ This will also install the required dependencies, including `python-docx` and `P
 Once the package is installed, you can use the `pdf-extractor` command to extract text from PDFs. Here's the basic usage:
 
 ```bash
-pdf-extractor /path/to/pdfs --output_dir /path/to/docx_files
+PDFtext2docx /path/to/pdfs --output_dir /path/to/docx_files
 ```
 
 - `/path/to/pdfs`: The input directory containing PDF files or the path to a single PDF.
