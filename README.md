@@ -1,5 +1,3 @@
-Certainly! You can update your `README.md` file to include information about the package and the updated installation instructions that include the required dependencies. Here's an example of how your README might look:
-
 ```markdown
 # PDF Extractor
 
