@@ -10,7 +10,7 @@ PDF Extractor is a Python package that allows you to extract text from PDF docum
 To install PDF Extractor, you can use `pip`. We recommend creating a virtual environment to keep your project dependencies isolated.
 
 ```bash
-pip install PDFtext2docx
+pip install install git+https://github.com/ivangoranov/PDFtext2docx
 ```
 
 This will also install the required dependencies, including `python-docx` and `PyMuPDF`.
