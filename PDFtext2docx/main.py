@@ -134,12 +134,22 @@ def extract_from_image(img_file):
 
 def translate_text(input_text, source_lang, target_lang):
     translated_text = []
+    sentence_delimiters = ['.', '!', '?']
 
-    for text in input_text:
-        translated = translator.translate(text, src=source_lang, dest=target_lang)
-        translated_text.append(translated.text)
+    for paragraph in input_text:
+        current_sentence = ""
+        for char in sanitize_xml(paragraph):
+            current_sentence += char
+            if char in sentence_delimiters:
+                translated = translator.translate(current_sentence, src=source_lang, dest=target_lang)
+                translated_text.append(translated.text)
+                current_sentence = ""
+        # Handle any remaining text as a separate sentence
+        if current_sentence:
+            translated = translator.translate(current_sentence, src=source_lang, dest=target_lang)
+            translated_text.append(translated.text)
 
-    return translated_text
+    return " ".join(translated_text)
 
 
 def create_document(extracted_text, input_pdf, output_dir, font_name, font_size):
