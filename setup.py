@@ -5,12 +5,12 @@ setup(
     version="1.0.0",
     packages=find_packages(),
     entry_points={
-        'console_scripts': [
-            'pdf_to_docx_extractor = PDFtext2docx.main:extract_text'
+        "console_scripts": [
+            "extract-and-create-docx = PDFtext2docx.main:extract_and_create_docx",
         ]
     },
     install_requires=[
-        'python-docx',
-        'PyMuPDF',
+        "python-docx",
+        "PyMuPDF",
     ],
 )
