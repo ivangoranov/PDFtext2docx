@@ -58,17 +58,20 @@ def extract_and_create_docx(
                 )
             )
         ]
-        image_files = [
-            {"path": pdf.path, "name": pdf.name.split(".")[0]}
-            for pdf in list(
-                filter(
-                    lambda a: a.name.lower().endswith(
-                        (".jpg", ".jpeg", ".png", ".bmp", ".gif")
-                    ),
-                    [f for f in os.scandir(input_dir)],
+        image_files = sorted(
+            [
+                {"path": pdf.path, "name": pdf.name.split(".")[0]}
+                for pdf in list(
+                    filter(
+                        lambda a: a.name.lower().endswith(
+                            (".jpg", ".jpeg", ".png", ".bmp", ".gif")
+                        ),
+                        [f for f in os.scandir(input_dir)],
+                    )
                 )
-            )
-        ]
+            ],
+            key=lambda x: x["name"],
+        )
         if len(image_files) > 0:
             for image in image_files:
                 document_text.extend(extract_from_image(image["path"]))
@@ -134,19 +137,23 @@ def extract_from_image(img_file):
 
 def translate_text(input_text, source_lang, target_lang):
     translated_text = []
-    sentence_delimiters = ['.', '!', '?']
+    sentence_delimiters = [".", "!", "?"]
 
     for paragraph in input_text:
         current_sentence = ""
         for char in sanitize_xml(paragraph):
             current_sentence += char
             if char in sentence_delimiters:
-                translated = translator.translate(current_sentence, src=source_lang, dest=target_lang)
+                translated = translator.translate(
+                    current_sentence, src=source_lang, dest=target_lang
+                )
                 translated_text.append(translated.text)
                 current_sentence = ""
         # Handle any remaining text as a separate sentence
         if current_sentence:
-            translated = translator.translate(current_sentence, src=source_lang, dest=target_lang)
+            translated = translator.translate(
+                current_sentence, src=source_lang, dest=target_lang
+            )
             translated_text.append(translated.text)
 
     return " ".join(translated_text)
